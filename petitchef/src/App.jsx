@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import './components/Main'
+import ReactDOM from 'react-dom';
 import Main from './components/Main'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Main/>
