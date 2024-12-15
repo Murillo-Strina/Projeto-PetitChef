@@ -1,7 +1,7 @@
   :global(.lightTheme) {
     --body-color: #ffffff; /* Fundo claro */
     --white-color: #000000; /* Texto escuro */
-    --theme-color: #FF6431;
+    --theme-color: #be2828;
     --black-color: #ffffff;
     --search-color: #eeeeee;
     --fire-bubble: #faf8f8;
@@ -12,7 +12,7 @@
   :global(.darkTheme) {
     --body-color: #141217; /* Fundo escuro */
     --white-color: #ffffff; /* Texto claro */
-    --theme-color: #FF6431;
+    --theme-color: #be2828;
     --black-color: #000000;
     --search-color: #272933;
     --fire-bubble: rgba(59, 65, 79, 0.5);
@@ -543,5 +543,19 @@
   .trendingDesc .bid span {
     font-size: 20px;
     line-height: 28px;
+  }
+
+  .logoImage {
+    width: 120px; 
+    height: auto; 
+    transition: all 0.3s ease-in-out; 
+  }
+  
+  .darkTheme .logoImage {
+    filter: brightness(0.8); 
+  }
+  
+  .lightTheme .logoImage {
+    filter: brightness(1); 
   }
   

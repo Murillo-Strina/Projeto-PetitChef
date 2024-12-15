@@ -1,44 +1,35 @@
 import './global.css'; // Estilos globais
 import React, { useEffect } from 'react';
 import styles from './Main.module.css';
+import logoImage from "/PetitChefLogo.png";
 
 function Main() {
   useEffect(() => {
     const themeSwitch = document.querySelector('#checkbox');
-    const logoImage = document.querySelector('#logo-image');
-
+  
     if (themeSwitch) {
       if (!document.body.classList.contains('darkTheme')) {
         document.body.classList.add('darkTheme');
-        if (logoImage) {
-          logoImage.src = '/path-to-dark-theme-logo.png'; 
-        }
       }
-
+  
       const handleThemeChange = () => {
         if (document.body.classList.contains('lightTheme')) {
           document.body.classList.remove('lightTheme');
           document.body.classList.add('darkTheme');
-          if (logoImage) {
-            logoImage.src = '/path-to-dark-theme-logo.png'; 
-          }
         } else {
           document.body.classList.remove('darkTheme');
           document.body.classList.add('lightTheme');
-          if (logoImage) {
-            logoImage.src = '/path-to-light-theme-logo.png'; 
-          }
         }
       };
-
+  
       themeSwitch.addEventListener('change', handleThemeChange);
-
+  
       return () => {
         themeSwitch.removeEventListener('change', handleThemeChange);
       };
     }
   }, []);
-
+  
 
 
   return (
@@ -48,11 +39,12 @@ function Main() {
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className={`${styles.headerInner} d-flex justify-content-between align-items-center`}>
               <a className="navbar-brand flex-shrink-0" href="#">
-                <img
-                  src="https://yudiz.com/codepen/nft-store/logo-icon.svg"
-                  alt="logo-image"
-                  className="img-fluid"
-                />
+              <img
+                id="logo-image"
+                src={logoImage}
+                alt="logo-image"
+                className={`${styles.logoImage} img-fluid`}
+              />
                 Petit Chef
               </a>
               <div className={`${styles.headerContent} d-flex align-items-center justify-content-end`}>
