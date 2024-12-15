@@ -8,17 +8,15 @@ function Main() {
     const themeSwitch = document.querySelector('#checkbox');
   
     if (themeSwitch) {
-      if (!document.body.classList.contains('darkTheme')) {
-        document.body.classList.add('darkTheme');
-      }
+      document.body.classList.add('darkTheme');
   
       const handleThemeChange = () => {
-        if (document.body.classList.contains('lightTheme')) {
-          document.body.classList.remove('lightTheme');
-          document.body.classList.add('darkTheme');
-        } else {
+        if (document.body.classList.contains('darkTheme')) {
           document.body.classList.remove('darkTheme');
           document.body.classList.add('lightTheme');
+        } else {
+          document.body.classList.remove('lightTheme');
+          document.body.classList.add('darkTheme');
         }
       };
   
@@ -45,7 +43,7 @@ function Main() {
                 alt="logo-image"
                 className={`${styles.logoImage} img-fluid`}
               />
-                Petit Chef
+                <span className={`${styles.logoText}`}>Petit Chef</span>
               </a>
               <div className={`${styles.headerContent} d-flex align-items-center justify-content-end`}>
                 <form className="d-flex justify-content-end align-items-center">

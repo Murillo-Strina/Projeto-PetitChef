@@ -1,6 +1,9 @@
   :global(.lightTheme) {
-    --body-color: #ffffff; /* Fundo claro */
-    --white-color: #000000; /* Texto escuro */
+    --body-color: #ffffff;
+    --white-color: #000000;
+    --logo-text-color: #000000;
+    --search-text-color: #000000;
+    --search-border-color: #cccccc;
     --theme-color: #be2828;
     --black-color: #ffffff;
     --search-color: #eeeeee;
@@ -10,8 +13,11 @@
   }
 
   :global(.darkTheme) {
-    --body-color: #141217; /* Fundo escuro */
-    --white-color: #ffffff; /* Texto claro */
+    --body-color: #141217;
+    --white-color: #ffffff;
+    --logo-text-color: #ffffff;
+    --search-text-color: #ffffff;
+    --search-border-color: #666666;
     --theme-color: #be2828;
     --black-color: #000000;
     --search-color: #272933;
@@ -557,5 +563,38 @@
   
   .lightTheme .logoImage {
     filter: brightness(1); 
+  }
+
+  .logoText {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--logo-text-color);
+    transition: color 0.3s ease;
+  }
+
+  input[type="search"] {
+    color: var(--search-text-color);
+    background: var(--search-color);
+    height: 42px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid var(--search-border-color);
+    transition: all 0.3s ease;
+  }
+  
+  input[type="search"]::placeholder {
+    color: var(--search-text-color);
+  }
+  
+  :global(.darkTheme) input[type="search"]:focus {
+    background: #3a3b40;
+    border-color: #9e9ea2;
+    color: #ffffff;
+  }
+  
+  :global(.lightTheme) input[type="search"]:focus {
+    background: #f5f5f5;
+    border-color: #8a8a8a;
+    color: #000000;
   }
   
