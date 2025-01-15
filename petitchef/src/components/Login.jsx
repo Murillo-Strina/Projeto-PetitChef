@@ -1,24 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
-import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false); 
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handleSenhaChange = (event) => setSenha(event.target.value);
 
+
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        const user = userCredential.user;
+        setIsSubmitted(true);
+        console.log("Usuário cadastrado:", userCredential.user);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.error("Erro ao cadastrar:", error.code, error.message);
       });
   };
 
@@ -53,6 +54,7 @@ function Login() {
               Entrar
             </button>
           </div>
+
           <div className={styles.subCont}>
             <div className={styles.img}>
               <div className={`${styles.imgText} ${styles.mUp}`}>
@@ -61,9 +63,7 @@ function Login() {
               </div>
               <div className={`${styles.imgText} ${styles.mIn}`}>
                 <h2>Já é um de nós?</h2>
-                <p>
-                  Se você já tem uma conta, é só fazer login!
-                </p>
+                <p>Se você já tem uma conta, é só fazer login!</p>
               </div>
               <div className={styles.img__btn}>
                 <span className={styles.mUp}>Cadastrar</span>
@@ -84,9 +84,34 @@ function Login() {
                 <span>Senha</span>
                 <input type="password" onChange={handleSenhaChange} />
               </label>
-              <button type="button" className={styles.submit} onClick={handleSignUp}>
-                Cadastrar
-              </button>
+              {!isSubmitted ? (
+                <button
+                  type="button"
+                  className={styles.submit}
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </button>
+              ) : (
+                <svg
+                  className={styles.checkmark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    className={styles.checkmark__circle}
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                  />
+                  <path
+                    className={styles.checkmark__check}
+                    fill="none"
+                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                  />
+                </svg>
+              )}
             </div>
           </div>
         </div>
