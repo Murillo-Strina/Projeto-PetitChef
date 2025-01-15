@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Main from './components/Main';
-import Login from './components/Login'; // Import your Login component
+import Login from './components/login'; // Import your Login component
 
 function App() {
   return (
@@ -18,3 +18,4 @@ function App() {
 }
 
 export default App;
+

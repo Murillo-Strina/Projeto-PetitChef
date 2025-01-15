@@ -1,4 +1,3 @@
-import './global.css'; // Estilos globais
 import React, { useEffect } from 'react';
 import styles from './Main.module.css';
 import logoImage from "/PetitChefLogo.png";
