@@ -17,6 +17,9 @@ function Login() {
       .then((userCredential) => {
         setIsSubmitted(true);
         console.log("Usuário cadastrado:", userCredential.user);
+        setTimeout(() => {
+          window.location.href = "http://localhost:5173";
+        }, 2500); 
       })
       .catch((error) => {
         console.error("Erro ao cadastrar:", error.code, error.message);
