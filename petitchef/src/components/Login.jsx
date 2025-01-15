@@ -67,7 +67,7 @@ function Login() {
               </div>
               <div className={styles.img__btn}>
                 <span className={styles.mUp}>Cadastrar</span>
-                <span className={styles.mIn}>Login</span>
+                <span className={styles.mIn}>Entrar</span>
               </div>
             </div>
             <div className={`${styles.form} ${styles.signUp}`}>
@@ -90,7 +90,7 @@ function Login() {
                   className={styles.submit}
                   onClick={handleSignUp}
                 >
-                  Sign Up
+                  Cadastrar
                 </button>
               ) : (
                 <svg
