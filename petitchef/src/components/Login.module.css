@@ -1,10 +1,9 @@
-.loginBody {
-  background-color: #141217;
-  color: #fff;
-  font-family: 'Manrope', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  height: 100vh; 
+.loginBody{
+    background-color: #141217;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 input, button {
@@ -26,7 +25,7 @@ input, button {
   width: 900px;
   height: 550px;
   margin: 0 auto 100px;
-  background: #666666;
+  background: #272933;
 }
 
 .form {
@@ -45,7 +44,7 @@ input, button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: #6666;
+  background: #272933;
   transition: transform 1.2s ease-in-out;
 }
 
@@ -84,10 +83,11 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
+  background-image: url('/BackgroundLoginPage.png');
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
+
 
 .img:after {
   content: '';
