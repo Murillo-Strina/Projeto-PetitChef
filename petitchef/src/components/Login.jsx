@@ -1,16 +1,39 @@
-import React, { useEffect } from 'react';
-import styles from './Login.module.css';
+import React, { useEffect } from "react";
+import styles from "./Login.module.css";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handleSenhaChange = (event) => setSenha(event.target.value);
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+
   useEffect(() => {
     const button = document.querySelector(`.${styles.img__btn}`);
     const container = document.querySelector(`.${styles.cont}`);
-    
+
     if (button && container) {
       const toggleSignup = () => container.classList.toggle(styles.sSignup);
-      button.addEventListener('click', toggleSignup);
+      button.addEventListener("click", toggleSignup);
 
-      return () => button.removeEventListener('click', toggleSignup);
+      return () => button.removeEventListener("click", toggleSignup);
     }
   }, []);
 
@@ -22,14 +45,16 @@ function Login() {
             <h2>Welcome back,</h2>
             <label>
               <span>Email</span>
-              <input type="email" />
+              <input type="email" onChange={handleEmailChange} />
             </label>
             <label>
               <span>Password</span>
-              <input type="password" />
+              <input type="password" onChange={handleSenhaChange} />
             </label>
             <p className={styles.forgotPass}>Forgot password?</p>
-            <button type="button" className={styles.submit}>Sign In</button>
+            <button type="button" className={styles.submit}>
+              Sign In
+            </button>
           </div>
           <div className={styles.subCont}>
             <div className={styles.img}>
@@ -39,7 +64,10 @@ function Login() {
               </div>
               <div className={`${styles.imgText} ${styles.mIn}`}>
                 <h2>One of us?</h2>
-                <p>If you already have an account, just sign in. We've missed you!</p>
+                <p>
+                  If you already have an account, just sign in. We've missed
+                  you!
+                </p>
               </div>
               <div className={styles.img__btn}>
                 <span className={styles.mUp}>Sign Up</span>
@@ -54,13 +82,15 @@ function Login() {
               </label>
               <label>
                 <span>Email</span>
-                <input type="email" />
+                <input type="email" onChange={handleEmailChange} />
               </label>
               <label>
                 <span>Password</span>
-                <input type="password" />
+                <input type="password" onChange={handleSenhaChange} />
               </label>
-              <button type="button" className={styles.submit}>Sign Up</button>
+              <button type="button" className={styles.submit} onClick={handleSignUp}>
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
