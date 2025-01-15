@@ -322,6 +322,7 @@
   }
   
   .headerContent form input[type="search"] {
+    text-align: left;
     color: var(--white-color);
     height: 42px;
     padding: 10px 20px;
@@ -337,7 +338,7 @@
   .searchIcon i {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 20px;
     width: 20px;
     height: 20px;
     line-height: 20px;
