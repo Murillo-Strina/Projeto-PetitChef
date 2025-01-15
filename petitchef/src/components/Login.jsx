@@ -7,6 +7,7 @@ import { auth } from "../../firebase";
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handleSenhaChange = (event) => setSenha(event.target.value);
@@ -14,7 +15,10 @@ function Login() {
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        // Signed up
+        setIsSubmitted(true);
+        setTimeout(() => {
+          console.log("Usuário cadastrado:", userCredential.user);
+        }, 1500);
         const user = userCredential.user;
         // ...
       })
@@ -88,9 +92,34 @@ function Login() {
                 <span>Password</span>
                 <input type="password" onChange={handleSenhaChange} />
               </label>
-              <button type="button" className={styles.submit} onClick={handleSignUp}>
-                Sign Up
-              </button>
+              {!isSubmitted ? (
+                <button
+                  type="button"
+                  className={styles.submit}
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </button>
+              ) : (
+                <svg
+                  className={styles.checkmark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    className={styles.checkmark__circle}
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                  />
+                  <path
+                    className={styles.checkmark__check}
+                    fill="none"
+                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                  />
+                </svg>
+              )}
             </div>
           </div>
         </div>
