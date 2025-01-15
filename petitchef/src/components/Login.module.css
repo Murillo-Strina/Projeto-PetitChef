@@ -306,7 +306,7 @@ input {
 
 .submit {
   display: block;
-  margin: 25px auto 0; /* Adicionado 25px no topo para empurrar o botão para baixo */
+  margin: 25px auto 0; 
   width: 260px;
   height: 36px;
   border-radius: 30px;
@@ -327,7 +327,7 @@ input {
   stroke-miterlimit: 10;
   box-shadow: inset 0px 0px 0px #4caf50;
   animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
-  margin: 25px auto 0; /* Alinha ao centro horizontalmente e move para baixo 25px */
+  margin: 25px auto 0;
 }
 
 .checkmark__circle {
