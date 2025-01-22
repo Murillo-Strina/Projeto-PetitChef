@@ -22,6 +22,12 @@ function Login() {
       });
   };
 
+  const handleKeyPress = (event, action) => {
+    if (event.key === "Enter") {
+      action();
+    }
+  };  
+
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
@@ -71,11 +77,11 @@ function Login() {
             <h2 className={styles.textDarker}>Bem-vindo de volta!</h2>
             <label className={styles.textDarker}>
               <span>Email</span>
-              <input type="email" onChange={handleEmailChange} />
+              <input type="email" onChange={handleEmailChange} onKeyDown={(event) => handleKeyPress(event, handleSignIn)}              />
             </label>
             <label className={styles.textDarker}>
               <span>Senha</span>
-              <input type="password" onChange={handleSenhaChange} />
+              <input type="password" onChange={handleSenhaChange} onKeyDown={(event) => handleKeyPress(event, handleSignIn)} />
             </label>
             <p className={`${styles.forgotPass} ${styles.textDarker}`} onClick={redefinirSenha}>
               Esqueceu a senha?
@@ -135,11 +141,11 @@ function Login() {
               </label>
               <label className={styles.textDarker}>
                 <span>Email</span>
-                <input type="email" onChange={handleEmailChange} />
+                <input type="email" onChange={handleEmailChange}   onKeyDown={(event) => handleKeyPress(event, handleSignUp)}/>
               </label>
               <label className={styles.textDarker}>
                 <span>Senha</span>
-                <input type="password" onChange={handleSenhaChange} />
+                <input type="password" onChange={handleSenhaChange}   onKeyDown={(event) => handleKeyPress(event, handleSignUp)}/>
               </label>
               {!isSubmitted ? (
                 <button
