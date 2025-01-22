@@ -138,7 +138,7 @@ function Login() {
               <span>Email</span>
               <input type="email" onChange={handleEmailChange} />
             </label>
-            <label>
+            <label className={styles.textDarker}>
               <span>Senha</span>
               <input type="password" onChange={handleSenhaChange} />
             </label>
@@ -170,6 +170,78 @@ function Login() {
                 />
               </svg>
             )}
+            <p className={`${styles.forgotPass} ${styles.textDarker}`}>
+              Esqueceu a senha?
+            </p>
+            <button type="button" className={styles.submit}>
+              Entrar
+            </button>
+          </div>
+
+          <div className={styles.subCont}>
+            <div className={styles.img}>
+              <div className={`${styles.imgText} ${styles.mUp}`}>
+                <h2 className={styles.textDarker}>Novo por aqui?</h2>
+                <p className={styles.textDarker}>
+                  Cadastre-se e descubra um mundo de novas receitas!
+                </p>
+              </div>
+              <div className={`${styles.imgText} ${styles.mIn}`}>
+                <h2 className={styles.textDarker}>Já é um de nós?</h2>
+                <p className={styles.textDarker}>
+                  Se você já tem uma conta, é só fazer login!
+                </p>
+              </div>
+              <div className={styles.img__btn}>
+                <span className={styles.mUp}>Cadastrar</span>
+                <span className={styles.mIn}>Entrar</span>
+              </div>
+            </div>
+            <div className={`${styles.form} ${styles.signUp}`}>
+              <h2 className={styles.textDarker}>
+                Prepare-se para saborear o melhor!
+              </h2>
+              <label className={styles.textDarker}>
+                <span>Nome</span>
+                <input type="text" />
+              </label>
+              <label className={styles.textDarker}>
+                <span>Email</span>
+                <input type="email" onChange={handleEmailChange} />
+              </label>
+              <label className={styles.textDarker}>
+                <span>Senha</span>
+                <input type="password" onChange={handleSenhaChange} />
+              </label>
+              {!isSubmitted ? (
+                <button
+                  type="button"
+                  className={styles.submit}
+                  onClick={handleSignUp}
+                >
+                  Cadastrar
+                </button>
+              ) : (
+                <svg
+                  className={styles.checkmark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    className={styles.checkmark__circle}
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                  />
+                  <path
+                    className={styles.checkmark__check}
+                    fill="none"
+                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                  />
+                </svg>
+              )}
+            </div>
           </div>
         </div>
       </div>
