@@ -1,6 +1,9 @@
 .loginBody {
-  background-color: #141217;
-  color: #fff;
+  background-color: var(--color-background-dark);
+  background-image: url('/LoginImage.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
   font-family: 'Manrope', sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -11,6 +14,18 @@
   width: 100vw; 
   margin: 0; 
   overflow: hidden; 
+}
+
+:root {
+  --color-background-dark: #141217;
+  --color-background-light: #36383f;
+  --color-text: #f0e8e8;
+  --color-text-muted: #f0e8e8;
+  --color-muted-strong: #5c6d96;
+  --color-primary: #be2828;
+  --color-primary-hover: #be2828;
+  --color-border: #f0e8e8;
+  --color-highlight: #4caf50;
 }
 
 input, button {
@@ -35,7 +50,8 @@ input, button {
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
-  background: #272933;
+  background: var(--color-background-light);
+  border-radius: 50px;
 }
 
 .form {
@@ -55,7 +71,7 @@ input, button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: #272933;
+  background: var(--color-background-light);
   transition: transform 1.2s ease-in-out;
 }
 
@@ -69,10 +85,10 @@ button {
   width: 260px;
   height: 36px;
   border-radius: 30px;
-  color: #fff;
+  color: var(--color-text);
   font-size: 15px;
   cursor: pointer;
-  background: #be2828;
+  background: var(--color-primary);
 }
 
 .img {
@@ -93,7 +109,7 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url('/BackgroundLoginPage.png');
+  background-image: url('/LoginBackground.png');
   background-size: cover;
   transition: transform 1.2s ease-in-out;
   transform: translate3d(-614px, 0, 0);
@@ -111,7 +127,7 @@ button {
   width: 100%;
   padding: 0 20px;
   text-align: center;
-  color: #fff;
+  color: var(--color-text);
   transition: transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
   transform: translateY(-50%);
 }
@@ -155,7 +171,7 @@ button {
   height: 50px;
   margin: 0 auto;
   background: transparent;
-  color: #fff;
+  color: var(--color-text);
   text-transform: uppercase;
   font-size: 15px;
   cursor: pointer;
@@ -169,7 +185,7 @@ button {
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid #fff;
+  border: 2px solid var(--color-text);
   border-radius: 30px;
 }
 
@@ -232,7 +248,7 @@ label {
 
 label span {
   font-size: 12px;
-  color: #cfcfcf;
+  color: var(--color-text-muted);
   text-transform: uppercase;
 }
 
@@ -250,24 +266,24 @@ input {
   margin-top: 15px;
   text-align: center;
   font-size: 12px;
-  color: #cfcfcf;
+  color: var(--color-text);
 }
 
 .submit {
   margin-top: 40px;
   margin-bottom: 20px;
-  background: #be2828;
+  background: var(--color-primary-hover);
   text-transform: uppercase;
 }
 
 .fb-btn {
-  border: 2px solid #d3dae9;
-  color: #a2acc9;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
 }
 
 .fb-btn span {
   font-weight: bold;
-  color: #5c6d96;
+  color: var(--color-muted-strong);
 }
 
 .sign-in {
@@ -310,10 +326,10 @@ input {
   width: 260px;
   height: 36px;
   border-radius: 30px;
-  color: #fff;
+  color: #d0d0d0;
   font-size: 15px;
   cursor: pointer;
-  background: #be2828;
+  background: var(--color-primary-hover);
   border: none;
 }
 
@@ -323,9 +339,9 @@ input {
   border-radius: 50%;
   display: block;
   stroke-width: 2;
-  stroke: #fff;
+  stroke: var(--color-text);
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px #4caf50;
+  box-shadow: inset 0px 0px 0px var(--color-highlight);
   animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
   margin: 25px auto 0;
 }
@@ -335,7 +351,7 @@ input {
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  stroke: #4caf50;
+  box-shadow: inset 0px 0px 0px var(--color-highlight);
   fill: none;
   animation: stroke 0.6s ease-in-out forwards;
 }
@@ -345,6 +361,10 @@ input {
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
   animation: stroke 0.3s ease-in-out 0.8s forwards;
+}
+
+.text-darker {
+  color: var(--color-text);
 }
 
 @keyframes stroke {

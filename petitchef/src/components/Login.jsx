@@ -6,11 +6,10 @@ import { auth } from "../../firebase";
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handleSenhaChange = (event) => setSenha(event.target.value);
-
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, senha)
@@ -19,7 +18,7 @@ function Login() {
         console.log("Usuário cadastrado:", userCredential.user);
         setTimeout(() => {
           window.location.href = "http://localhost:5173";
-        }, 2500); 
+        }, 2500);
       })
       .catch((error) => {
         console.error("Erro ao cadastrar:", error.code, error.message);
@@ -43,16 +42,18 @@ function Login() {
       <div className={styles.loginBody}>
         <div className={styles.cont}>
           <div className={`${styles.form} ${styles.signIn}`}>
-            <h2>Bem-vindo de volta!</h2>
-            <label>
+            <h2 className={styles.textDarker}>Bem-vindo de volta!</h2>
+            <label className={styles.textDarker}>
               <span>Email</span>
               <input type="email" onChange={handleEmailChange} />
             </label>
-            <label>
+            <label className={styles.textDarker}>
               <span>Senha</span>
               <input type="password" onChange={handleSenhaChange} />
             </label>
-            <p className={styles.forgotPass}>Esqueceu a senha?</p>
+            <p className={`${styles.forgotPass} ${styles.textDarker}`}>
+              Esqueceu a senha?
+            </p>
             <button type="button" className={styles.submit}>
               Entrar
             </button>
@@ -61,12 +62,16 @@ function Login() {
           <div className={styles.subCont}>
             <div className={styles.img}>
               <div className={`${styles.imgText} ${styles.mUp}`}>
-                <h2>Novo por aqui?</h2>
-                <p>Cadastre-se e descubra um mundo de novas receitas!</p>
+                <h2 className={styles.textDarker}>Novo por aqui?</h2>
+                <p className={styles.textDarker}>
+                  Cadastre-se e descubra um mundo de novas receitas!
+                </p>
               </div>
               <div className={`${styles.imgText} ${styles.mIn}`}>
-                <h2>Já é um de nós?</h2>
-                <p>Se você já tem uma conta, é só fazer login!</p>
+                <h2 className={styles.textDarker}>Já é um de nós?</h2>
+                <p className={styles.textDarker}>
+                  Se você já tem uma conta, é só fazer login!
+                </p>
               </div>
               <div className={styles.img__btn}>
                 <span className={styles.mUp}>Cadastrar</span>
@@ -74,16 +79,18 @@ function Login() {
               </div>
             </div>
             <div className={`${styles.form} ${styles.signUp}`}>
-              <h2>Prepare-se para saborear o melhor!</h2>
-              <label>
+              <h2 className={styles.textDarker}>
+                Prepare-se para saborear o melhor!
+              </h2>
+              <label className={styles.textDarker}>
                 <span>Nome</span>
                 <input type="text" />
               </label>
-              <label>
+              <label className={styles.textDarker}>
                 <span>Email</span>
                 <input type="email" onChange={handleEmailChange} />
               </label>
-              <label>
+              <label className={styles.textDarker}>
                 <span>Senha</span>
                 <input type="password" onChange={handleSenhaChange} />
               </label>
