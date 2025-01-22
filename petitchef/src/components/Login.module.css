@@ -1,6 +1,8 @@
 .loginBody {
   background-color: var(--color-background-dark);
-  background-image: url('/LoginImage.png');
+  background-image: 
+  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+  url('/LoginImage.png');
   background-size: cover; 
   background-repeat: no-repeat; 
   background-position: center; 
@@ -238,7 +240,7 @@ button {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 h2 {
@@ -268,13 +270,6 @@ input {
   font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
-}
-
-.forgot-pass {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--color-text);
 }
 
 .submit {
@@ -334,7 +329,7 @@ input {
   width: 260px;
   height: 36px;
   border-radius: 30px;
-  color: #d0d0d0;
+  color: var(--color-text);
   font-size: 15px;
   cursor: pointer;
   background: var(--color-primary-hover);
@@ -359,7 +354,6 @@ input {
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px var(--color-highlight);
   fill: none;
   animation: stroke 0.6s ease-in-out forwards;
 }
