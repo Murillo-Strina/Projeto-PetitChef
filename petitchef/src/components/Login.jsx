@@ -11,6 +11,17 @@ function Login() {
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handleSenhaChange = (event) => setSenha(event.target.value);
 
+  const redefinirSenha = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("E-mail de redefinição de senha enviado com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar e-mail de redefinição:", error.code, error.message);
+        alert("Erro ao enviar e-mail de redefinição. Verifique o e-mail informado.");
+      });
+  };
+
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
@@ -22,6 +33,21 @@ function Login() {
       })
       .catch((error) => {
         console.error("Erro ao cadastrar:", error.code, error.message);
+      });
+  };
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setIsSubmitted(true);
+        console.log("Usuário Logado:", userCredential.user);
+        setTimeout(() => {
+          window.location.href = "http://localhost:5173";
+        }, 2500);
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer login:", error.code, error.message);
       });
   };
 
@@ -51,7 +77,7 @@ function Login() {
               <span>Senha</span>
               <input type="password" onChange={handleSenhaChange} />
             </label>
-            <p className={`${styles.forgotPass} ${styles.textDarker}`}>
+            <p className={`${styles.forgotPass} ${styles.textDarker}`} onClick={redefinirSenha}>
               Esqueceu a senha?
             </p>
             <button type="button" className={styles.submit}>
