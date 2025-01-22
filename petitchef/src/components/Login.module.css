@@ -11,9 +11,9 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw; 
-  margin: 0; 
-  overflow: hidden; 
+  width: 100vw;
+  margin: 0;
+  overflow: hidden;
 }
 
 :root {
@@ -32,7 +32,7 @@ input, button {
   border: none;
   outline: none;
   background: none;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 .tip {
@@ -50,7 +50,7 @@ input, button {
 }
 
 .cont {
-  display:flex;
+  display: flex;
   overflow: hidden;
   position: relative;
   width: 900px;
@@ -111,7 +111,7 @@ button {
 }
 
 .img:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -124,7 +124,7 @@ button {
 }
 
 .cont.s--signup .img:before {
-  transform: translate3d(0px, 0, 0); 
+  transform: translate3d(0px, 0, 0);
 }
 
 .img__text {
@@ -139,7 +139,6 @@ button {
   transition: transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
   transform: translateY(-50%);
 }
-
 
 .img__text h2 {
   margin-bottom: 10px;
@@ -186,7 +185,7 @@ button {
 }
 
 .img__btn:after {
-  content: '';
+  content: "";
   z-index: 2;
   position: absolute;
   left: 0;
@@ -213,26 +212,26 @@ button {
 
 .img__btn span.m--in {
   opacity: 0;
-  transform: translateY(-50%) translateY(50px); 
+  transform: translateY(-50%) translateY(50px);
 }
 
 .cont.s--signup .img__btn span.m--in {
   opacity: 1;
-  transform: translateY(-50%) translateY(0); 
+  transform: translateY(-50%) translateY(0);
 }
 
 .img__btn span.m--up {
   opacity: 1;
-  transform: translateY(-50%) translateY(0); 
+  transform: translateY(-50%) translateY(0);
 }
 
 .cont.s--signup .img__btn span.m--up {
   opacity: 0;
-  transform: translateY(-50%) translateY(-50px); 
+  transform: translateY(-50%) translateY(-50px);
 }
 
 .img:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -295,10 +294,10 @@ input {
 }
 
 .sign-in {
-  position: relative; 
-  left: -120px; 
-  top: 20px; 
-  transition: transform 1.2s ease-out; 
+  position: relative;
+  left: -120px;
+  top: 20px;
+  transition: transform 1.2s ease-out;
 }
 
 .cont.s--signup .sign-in {
@@ -306,7 +305,6 @@ input {
   transition-duration: 1.2s;
   transform: translate3d(640px, 0, 0);
 }
-
 
 .sign-up {
   transform: translate3d(-900px, 0, 0);
@@ -330,7 +328,7 @@ input {
 
 .submit {
   display: block;
-  margin: 25px auto 0; 
+  margin: 25px auto 0;
   width: 260px;
   height: 36px;
   border-radius: 30px;
@@ -369,6 +367,13 @@ input {
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
   animation: stroke 0.3s ease-in-out 0.8s forwards;
+}
+
+.forgot-pass {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text);
 }
 
 .text-darker {
