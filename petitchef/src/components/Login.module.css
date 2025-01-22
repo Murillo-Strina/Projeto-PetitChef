@@ -1,9 +1,16 @@
-.loginBody{
-    background-color: #141217;
-    color: #fff;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    line-height: 24px;
+.loginBody {
+  background-color: #141217;
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw; 
+  margin: 0; 
+  overflow: hidden; 
 }
 
 input, button {
@@ -20,11 +27,14 @@ input, button {
 }
 
 .cont {
+  display:flex;
   overflow: hidden;
   position: relative;
   width: 900px;
   height: 550px;
-  margin: 0 auto 100px;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
   background: #272933;
 }
 
@@ -34,6 +44,7 @@ input, button {
   height: 100%;
   transition: transform 1.2s ease-in-out;
   padding: 50px 30px 0;
+  margin-top: 25px;
 }
 
 .sub-cont {
@@ -61,9 +72,8 @@ button {
   color: #fff;
   font-size: 15px;
   cursor: pointer;
-  background: #be2828; 
+  background: #be2828;
 }
-
 
 .img {
   overflow: hidden;
@@ -79,41 +89,33 @@ button {
 .img:before {
   content: '';
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   width: 900px;
   height: 100%;
   background-image: url('/BackgroundLoginPage.png');
   background-size: cover;
   transition: transform 1.2s ease-in-out;
-}
-
-
-.img:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  transform: translate3d(-614px, 0, 0);
 }
 
 .cont.s--signup .img:before {
-  transform: translate3d(640px, 0, 0);
+  transform: translate3d(0px, 0, 0); 
 }
 
 .img__text {
   z-index: 2;
   position: absolute;
   left: 0;
-  top: 50px;
+  top: 30%;
   width: 100%;
   padding: 0 20px;
   text-align: center;
   color: #fff;
-  transition: transform 1.2s ease-in-out;
+  transition: transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  transform: translateY(-50%);
 }
+
 
 .img__text h2 {
   margin-bottom: 10px;
@@ -126,19 +128,23 @@ button {
 }
 
 .img__text.m--up {
-  transform: translateX(520px);
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 .cont.s--signup .img__text.m--up {
-  transform: translateX(0);
+  opacity: 0;
+  transform: translateY(-50%) translateX(100%);
 }
 
 .img__text.m--in {
-  transform: translateX(-520px);
+  opacity: 0;
+  transform: translateY(-50%) translateX(-100%);
 }
 
 .cont.s--signup .img__text.m--in {
-  transform: translateX(0);
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 .img__btn {
@@ -146,7 +152,7 @@ button {
   z-index: 2;
   position: relative;
   width: 100px;
-  height: 36px;
+  height: 50px;
   margin: 0 auto;
   background: transparent;
   color: #fff;
@@ -170,29 +176,45 @@ button {
 .img__btn span {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  transition: transform 1.2s;
+  transition: transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  transform: translateY(-50%);
+  opacity: 1;
 }
 
 .img__btn span.m--in {
-  transform: translateY(-72px);
+  opacity: 0;
+  transform: translateY(-50%) translateY(50px); 
 }
 
 .cont.s--signup .img__btn span.m--in {
-  transform: translateY(0);
+  opacity: 1;
+  transform: translateY(-50%) translateY(0); 
 }
 
 .img__btn span.m--up {
-  transform: translateY(72px);
+  opacity: 1;
+  transform: translateY(-50%) translateY(0); 
 }
 
 .cont.s--signup .img__btn span.m--up {
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(-50%) translateY(-50px); 
+}
+
+.img:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 h2 {
@@ -249,7 +271,10 @@ input {
 }
 
 .sign-in {
-  transition-timing-function: ease-out;
+  position: relative; 
+  left: -120px; 
+  top: 20px; 
+  transition: transform 1.2s ease-out; 
 }
 
 .cont.s--signup .sign-in {
@@ -257,6 +282,7 @@ input {
   transition-duration: 1.2s;
   transform: translate3d(640px, 0, 0);
 }
+
 
 .sign-up {
   transform: translate3d(-900px, 0, 0);
@@ -278,14 +304,67 @@ input {
   vertical-align: top;
 }
 
-.icon-link--twitter {
-  left: auto;
-  right: 5px;
+.submit {
+  display: block;
+  margin: 25px auto 0; 
+  width: 260px;
+  height: 36px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  background: #be2828;
+  border: none;
 }
 
-.link-footer {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #4caf50;
+  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+  margin: 25px auto 0;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #4caf50;
+  fill: none;
+  animation: stroke 0.6s ease-in-out forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s ease-in-out 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4caf50;
+  }
 }

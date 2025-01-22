@@ -1,16 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Main from './components/Main';
-import Login from './components/login'; // Import your Login component
+import Login from './components/login'; 
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Define the route for the login page */}
         <Route path="/login" element={<Login />} />
-
-        {/* Define the route for the main page */}
         <Route path="/" element={<Main />} />
       </Routes>
     </Router>
