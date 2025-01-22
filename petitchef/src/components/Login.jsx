@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
-import { createUserWithEmailAndPassword, sendPasswordResetEmail,createUserWithEmailAndPassword  } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword  } from "firebase/auth";
 import { auth } from "../../firebase";
 
 function Login() {
