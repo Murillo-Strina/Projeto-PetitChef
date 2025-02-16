@@ -25,3 +25,6 @@ dist-ssr
 
 # Ignorar firebase.js
 firebase.js
+
+# Ignorar arquivos de configuração sensíveis
+.env
