@@ -1,8 +1,68 @@
-<div className={styles.mainContent}>
-  {loading && <p>Carregando imagens...</p>}
-  {error && <p>Erro ao carregar imagens: {error}</p>}
-  {!loading && !error && images.length > 0 && (
-    <>
+import React, { useEffect, useState } from 'react'
+import styles from './Main.module.css' 
+
+function UnsplashGallery() {
+  const [images, setImages] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const CACHE_DURATION = 30 * 60 * 1000 
+
+  const fetchImages = () => {
+    const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID
+    if (!clientId) {
+      setError('Erro: VITE_UNSPLASH_CLIENT_ID não foi encontrado. Verifique o arquivo .env.')
+      setLoading(false)
+      return
+    }
+    const url = `https://api.unsplash.com/photos/random?query=food plate&count=4&client_id=${clientId}`
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Limite de requisições atingido ou erro na API.')
+        }
+        return response.json()
+      })
+      .then(data => {
+        setImages(data)
+        localStorage.setItem('unsplashImages', JSON.stringify(data))
+        localStorage.setItem('unsplashImagesTimestamp', Date.now())
+      })
+      .catch(err => {
+        console.error('Erro ao buscar imagens do Unsplash:', err)
+        setError('Erro ao buscar imagens do Unsplash')
+      })
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => {
+    const cachedImages = localStorage.getItem('unsplashImages')
+    const cachedTimestamp = localStorage.getItem('unsplashImagesTimestamp')
+    if (cachedImages && cachedTimestamp) {
+      const now = Date.now()
+      const diff = now - parseInt(cachedTimestamp, 10)
+      if (diff < CACHE_DURATION) {
+        setImages(JSON.parse(cachedImages))
+        setLoading(false)
+        return
+      }
+    }
+    fetchImages()
+  }, [])
+
+  if (loading) {
+    return <p>Carregando imagens...</p>
+  }
+
+  if (error) {
+    return <p>Erro ao carregar imagens: {error}</p>
+  }
+
+  if (images.length === 0) {
+    return <p>Nenhuma imagem encontrada.</p>
+  }
+
+  return (
+    <div className={styles.mainContent}>
       <div className={`${styles.heroContainer} d-flex`}>
         <div className={styles.heroLeft}>
           <img
@@ -73,6 +133,8 @@
           </div>
         ))}
       </div>
-    </>
-  )}
-</div>
+    </div>
+  )
+}
+
+export default UnsplashGallery
