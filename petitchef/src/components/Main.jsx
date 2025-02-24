@@ -1,33 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Main.module.css';
-import logoImage from "/PetitChefLogo.png";
+import logoImage from '/PetitChefLogo.png';
 
 function Main() {
-  useEffect(() => {
-    const themeSwitch = document.querySelector('#checkbox');
-  
-    if (themeSwitch) {
-      document.body.classList.add('darkTheme');
-  
-      const handleThemeChange = () => {
-        if (document.body.classList.contains('darkTheme')) {
-          document.body.classList.remove('darkTheme');
-          document.body.classList.add('lightTheme');
-        } else {
-          document.body.classList.remove('lightTheme');
-          document.body.classList.add('darkTheme');
-        }
-      };
-  
-      themeSwitch.addEventListener('change', handleThemeChange);
-  
-      return () => {
-        themeSwitch.removeEventListener('change', handleThemeChange);
-      };
-    }
-  }, []);
-  
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    document.body.classList.toggle('darkTheme', isDarkTheme);
+    document.body.classList.toggle('lightTheme', !isDarkTheme);
+  }, [isDarkTheme]);
+
+  const handleThemeChange = () => {
+    setIsDarkTheme(prev => !prev);
+  };
+
+  const fetchImages = () => {
+    const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID;
+
+    if (!clientId) {
+      setError("Erro: VITE_UNSPLASH_CLIENT_ID não foi encontrado. Verifique o arquivo .env.");
+      return;
+    }
+
+    const url = `https://api.unsplash.com/photos/random?query=food plate&count=4&client_id=${clientId}`;
+
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Limite de requisições atingido ou erro na API.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data) {
+          setImages(data);
+          localStorage.setItem('unsplashImages', JSON.stringify(data));
+        }
+      })
+      .catch(err => {
+        console.error('Erro ao buscar imagens do Unsplash:', err);
+        const savedImages = JSON.parse(localStorage.getItem('unsplashImages'));
+        if (savedImages && savedImages.length > 0) {
+          setImages(savedImages);
+        } else {
+          const emergencyImages = [
+            {
+              urls: { regular: 'https://via.placeholder.com/800x600', small: 'https://via.placeholder.com/400x300' },
+              user: { name: 'Autor Desconhecido', links: { html: '#' } },
+              id: 'emergency1'
+            },
+            {
+              urls: { regular: 'https://via.placeholder.com/800x600', small: 'https://via.placeholder.com/400x300' },
+              user: { name: 'Autor Desconhecido', links: { html: '#' } },
+              id: 'emergency2'
+            },
+            {
+              urls: { regular: 'https://via.placeholder.com/800x600', small: 'https://via.placeholder.com/400x300' },
+              user: { name: 'Autor Desconhecido', links: { html: '#' } },
+              id: 'emergency3'
+            },
+            {
+              urls: { regular: 'https://via.placeholder.com/800x600', small: 'https://via.placeholder.com/400x300' },
+              user: { name: 'Autor Desconhecido', links: { html: '#' } },
+              id: 'emergency4'
+            }
+          ];
+          setImages(emergencyImages);
+        }
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
     <div>
@@ -36,27 +85,32 @@ function Main() {
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className={`${styles.headerInner} d-flex justify-content-between align-items-center`}>
               <a className="navbar-brand flex-shrink-0" href="#">
-              <img
-                id="logo-image"
-                src={logoImage}
-                alt="logo-image"
-                className={`${styles.logoImage} img-fluid`}
-              />
-                <span className={`${styles.logoText}`}>Petit Chef</span>
+                <img
+                  id="logo-image"
+                  src={logoImage}
+                  alt="logo-image"
+                  className={`${styles.logoImage} img-fluid`}
+                />
+                <span className={styles.logoText}>Petit Chef</span>
               </a>
               <div className={`${styles.headerContent} d-flex align-items-center justify-content-end`}>
                 <form className="d-flex justify-content-end align-items-center">
                   <div className={styles.searchIcon}>
-                    <i className="fa fa-search" aria-hidden="true"></i>
+                    <i className="fa fa-search" aria-hidden="true" aria-label="Buscar"></i>
                     <input
                       className="form-control"
                       type="search"
-                      placeholder="Search"
-                      aria-label="Search"
+                      placeholder="Buscar"
+                      aria-label="Buscar"
                     />
                   </div>
                   <label className={`${styles.switch} flex-shrink-0 mb-0`}>
-                    <input id="checkbox" type="checkbox" />
+                    <input
+                      id="checkbox"
+                      type="checkbox"
+                      checked={isDarkTheme}
+                      onChange={handleThemeChange}
+                    />
                     <span className={`${styles.slider} ${styles.round}`}></span>
                   </label>
                 </form>
@@ -67,16 +121,17 @@ function Main() {
                   />
                 </a>
                 <a href="#" className={styles.notification}>
-                  <i className="fa fa-bell" aria-hidden="true"></i>
+                  <i className="fa fa-bell" aria-hidden="true" aria-label="Notificações"></i>
                 </a>
               </div>
             </div>
           </nav>
         </div>
       </header>
-      <div className={styles.nftStore}>
+
+      <div className={styles.contentWrapper}>
         <div className="container-fluid">
-          <div className={`${styles.nftStoreInner} d-flex`}>
+          <div className={`${styles.contentInner} d-flex`}>
             <div className={styles.menuLinks}>
               <ul>
                 <li className={`${styles.navItem} ${styles.active}`}>
@@ -94,146 +149,119 @@ function Main() {
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-heart-o" aria-hidden="true"></i>
-                    <span>Favourite</span>
+                    <span>Favoritos</span>
                   </a>
                 </li>
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-square-o" aria-hidden="true"></i>
-                    <span>Collections</span>
+                    <span>Coleções</span>
                   </a>
                 </li>
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-fire" aria-hidden="true"></i>
-                    <span>Trending</span>
+                    <span>Em Alta</span>
                   </a>
                 </li>
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-star" aria-hidden="true"></i>
-                    <span>Featured</span>
+                    <span>Destaques</span>
                   </a>
                 </li>
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span>Purchased</span>
+                    <span>Comprados</span>
                   </a>
                 </li>
                 <li className={styles.navItem}>
                   <a href="#" className="d-flex align-items-center nav-link">
                     <i className="fa fa-cog" aria-hidden="true"></i>
-                    <span>Settings</span>
+                    <span>Configurações</span>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div className={styles.nftStoreContent}>
-              <div className={styles.nftUpContent}>
-                <div className="row">
-                  <div className="col-md-8">
-                    <div className={`${styles.fireBubbleArt} d-flex justify-content-between align-items-center`}>
+            <div className={styles.mainContent}>
+              {loading && <p>Carregando imagens...</p>}
+              {error && <p>{error}</p>}
+              {!loading && !error && images.length > 0 && (
+                <>
+                  <div className={`${styles.heroContainer} d-flex`}>
+                    <div className={styles.heroLeft}>
                       <img
-                        src="https://yudiz.com/codepen/nft-store/image-1.svg"
-                        alt="fire-bubble-image"
-                        className={`${styles.fireImage} ${styles.fireWidth}`}
+                        src={images[0].urls.regular}
+                        alt="Prato"
+                        className={styles.heroImage}
+                        loading="lazy"
                       />
-                      <div className={`${styles.fireContent} ${styles.fireWidth}`}>
-                        <h3 className="mb-0">Fire'o Bubble Art</h3>
-                        <div className={`${styles.fireTime} d-flex justify-content-between`}>
-                          <div className={styles.currentBid}>
-                            <h4>Current Bid</h4>
-                            <span>0.70 ETH</span>
-                          </div>
-                          <div className={styles.auction}>
-                            <h4>Auction Ending in</h4>
-                            <span>07h:25m:46s</span>
-                          </div>
-                          <span className={styles.middleLine}></span>
-                        </div>
-                        <span className={styles.fireUser}>
-                          <img
-                            src="https://yudiz.com/codepen/nft-store/user-pic1.svg"
-                            alt="user-image"
-                          />
-                          Rose Ortega
-                        </span>
-                        <div className={`d-flex ${styles.fireLinks}`}>
-                          <a href="#" className={`${styles.heart} flex-shrink-0`}>
-                            <i className="fa fa-heart-o" aria-hidden="true"></i>
-                          </a>
-                          <a href="#" className={styles.themeBtn}>
-                            Place a bid
-                          </a>
-                        </div>
-                      </div>
+                      <p className={styles.heroCredit}>
+                        Foto por{' '}
+                        <a
+                          href={`${images[0].user.links.html}?utm_source=PetitChef&utm_medium=referral`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {images[0].user.name}
+                        </a>{' '}
+                        no{' '}
+                        <a
+                          href="https://unsplash.com/?utm_source=PetitChef&utm_medium=referral"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Unsplash
+                        </a>
+                      </p>
+                    </div>
+                    <div className={styles.heroRight}>
+                      <h2 className={styles.heroTitle}>Venha conhecer nosso novo prato!</h2>
+                      <p className={styles.heroSubtitle}>Experimente um sabor como nunca antes.</p>
                     </div>
                   </div>
-                  <div className="col-md-4">
-                    <figure
-                      className={styles.paintImage}
-                      style={{
-                        background:
-                          "url('https://yudiz.com/codepen/nft-store/image-2.svg') no-repeat center center / cover",
-                      }}
-                    >
-                      <h1>Paint Art</h1>
-                    </figure>
-                  </div>
-                </div>
-              </div>
 
-              <div className={styles.trending}>
-                <div className={styles.trendingTitle}>
-                  <div className="row justify-content-between align-items-center">
-                    <div className="col-6">
-                      <h2>Trending Auctions</h2>
-                    </div>
-                    <div className="col-6 text-right">
-                      <a href="#" className={styles.themeBtn}>
-                        View More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.trendingGrid}>
-                  <div className="row">
-                    {[1, 2, 3].map((item) => (
-                      <div key={item} className="col-md-4">
-                        <div className={styles.trendingContent}>
-                          <img
-                            src={`https://yudiz.com/codepen/nft-store/card-${item}.svg`}
-                            alt={`card-image-${item}`}
-                            className="img-fluid"
-                          />
-                          <div className={styles.trendingDesc}>
-                            <h4 className={styles.userTitle}>User {item}</h4>
-                            <h3 className={styles.userPosition}>Artwork {item}</h3>
-                            <div className={`${styles.bid} d-flex justify-content-between align-items-center`}>
-                              <div>
-                                <h5>Current Bid</h5>
-                                <span>0.70 ETH</span>
-                              </div>
-                              <div>
-                                <h5>Auction Ending in</h5>
-                                <span>07h:25m:46s</span>
-                              </div>
-                            </div>
-                            <img
-                              src={`https://yudiz.com/codepen/nft-store/user-pic${item + 2}.svg`}
-                              alt={`user-pic-${item}`}
-                              className={styles.userImage}
-                            />
-                          </div>
-                        </div>
+                  <div className={styles.dishesContainer}>
+                    {images.slice(1, 4).map((img, index) => (
+                      <div key={img.id} className={`${styles.dishCard} ${styles.dishTheme}`}>
+                        <img
+                          src={img.urls.small}
+                          alt="Prato"
+                          className={styles.dishImage}
+                          loading="lazy"
+                        />
+                        <h3 className={styles.dishTitle}>
+                          {index === 0
+                            ? "Experimente Agora"
+                            : index === 1
+                            ? "Aproveite o Sabor"
+                            : "Desfrute o Momento"}
+                        </h3>
+                        <p className={styles.dishCredit}>
+                          Foto por{' '}
+                          <a
+                            href={`${img.user.links.html}?utm_source=PetitChef&utm_medium=referral`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {img.user.name}
+                          </a>{' '}
+                          no{' '}
+                          <a
+                            href="https://unsplash.com/?utm_source=PetitChef&utm_medium=referral"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Unsplash
+                          </a>
+                        </p>
                       </div>
                     ))}
                   </div>
-                </div>
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>
