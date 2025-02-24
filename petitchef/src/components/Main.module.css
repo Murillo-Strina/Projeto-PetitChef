@@ -376,6 +376,7 @@ input:checked + .slider:before {
 }
 
 .heroSubtitle {
+  text-align: center;
   font-size: 1rem;
   opacity: 0.8;
   margin-bottom: 1rem;
