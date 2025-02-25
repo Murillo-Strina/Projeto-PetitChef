@@ -3,7 +3,7 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');
 
 :global(.lightTheme) {
-  --body-color: #ffffff;
+  --body-color: #e0e0e0;
   --white-color: #000000;
   --logo-text-color: #000000;
   --search-text-color: #000000;
