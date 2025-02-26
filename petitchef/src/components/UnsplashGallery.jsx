@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import styles from './Main.module.css' 
+import React, { useEffect, useState, useRef } from 'react'
+import styles from './Main.module.css'
 
 function UnsplashGallery() {
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const hasFetched = useRef(false)
   const CACHE_DURATION = 600000
 
-  const fetchImages = () => {
+  const fetchImages = async () => {
     const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID
     if (!clientId) {
       setError('Erro: VITE_UNSPLASH_CLIENT_ID não foi encontrado. Verifique o arquivo .env.')
       setLoading(false)
       return
     }
-    const url = `https://api.unsplash.com/photos/random?query=food plate&count=4&client_id=${clientId}`
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Limite de requisições atingido ou erro na API.')
-        }
-        return response.json()
-      })
-      .then(data => {
-        setImages(data)
-        localStorage.setItem('unsplashImages', JSON.stringify(data))
-        localStorage.setItem('unsplashImagesTimestamp', Date.now())
-      })
-      .catch(err => {
-        console.error('Erro ao buscar imagens do Unsplash:', err)
-        setError('Erro ao buscar imagens do Unsplash')
-      })
-      .finally(() => setLoading(false))
+    const url = `https://api.unsplash.com/photos/random?query=food+dish&count=4&client_id=${clientId}`
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error('Limite de requisições atingido ou erro na API.')
+      }
+      const data = await response.json()
+      setImages(data)
+      localStorage.setItem('unsplashImages', JSON.stringify(data))
+      localStorage.setItem('unsplashImagesTimestamp', Date.now())
+    } catch (err) {
+      console.error('Erro ao buscar imagens do Unsplash:', err)
+      setError('Erro ao buscar imagens do Unsplash')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
+    if (hasFetched.current) return
     const cachedImages = localStorage.getItem('unsplashImages')
     const cachedTimestamp = localStorage.getItem('unsplashImagesTimestamp')
     if (cachedImages && cachedTimestamp) {
@@ -43,10 +43,12 @@ function UnsplashGallery() {
       if (diff < CACHE_DURATION) {
         setImages(JSON.parse(cachedImages))
         setLoading(false)
+        hasFetched.current = true
         return
       }
     }
     fetchImages()
+    hasFetched.current = true
   }, [])
 
   if (loading) {
