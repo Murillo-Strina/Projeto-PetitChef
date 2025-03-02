@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './Main.module.css'
 import logoImage from '/PetitChefLogo.png'
 import UnsplashGallery from './UnsplashGallery' 
+import { auth } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Main() {
   const [isDarkTheme, setIsDarkTheme] = useState(true)
@@ -14,6 +16,20 @@ function Main() {
   const handleThemeChange = () => {
     setIsDarkTheme(prev => !prev)
   }
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      console.log("Usuário Logado " +uid)
+      // ...
+    } else {
+      // User is signed out
+      // ...
+      console.log("O usuário não está logado")
+    }
+  });
 
   return (
     <div>
