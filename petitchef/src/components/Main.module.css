@@ -145,6 +145,7 @@ h5 {
 }
 
 .switch {
+  margin-top: 0 !important;
   position: relative;
   display: inline-block;
   width: 60px;
@@ -330,8 +331,8 @@ input:checked + .slider:before {
 }
 
 .mainContent {
-  width: 100%;
-  margin: 0 0 32px 32px;
+  width: 65vw;
+  margin: 0 auto;
 }
 
 .heroContainer {

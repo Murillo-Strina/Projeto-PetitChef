@@ -6,7 +6,7 @@ function UnsplashGallery() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const hasFetched = useRef(false)
-  const CACHE_DURATION = 600000
+  const CACHE_DURATION = 10000
 
   const fetchImages = async () => {
     const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID
@@ -15,7 +15,7 @@ function UnsplashGallery() {
       setLoading(false)
       return
     }
-    const url = `https://api.unsplash.com/photos/random?query=food+dish&count=4&client_id=${clientId}`
+    const url = `https://api.unsplash.com/photos/random?query=food+dish&count=20&client_id=${clientId}`
     try {
       const response = await fetch(url)
       if (!response.ok) {
@@ -99,7 +99,7 @@ function UnsplashGallery() {
       </div>
 
       <div className={styles.dishesContainer}>
-        {images.slice(1, 4).map((img, index) => (
+        {images.slice(1, 20).map((img, index) => (
           <div key={img.id} className={`${styles.dishCard} ${styles.dishTheme}`}>
             <img
               src={img.urls.small}
