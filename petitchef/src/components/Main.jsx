@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import styles from './Main.module.css'
-import logoImage from '/PetitChefLogo.png'
-import UnsplashGallery from './UnsplashGallery' 
+import React, { useEffect, useState } from 'react';
+import styles from './Main.module.css';
+import logoImage from '/PetitChefLogo.png';
+import UnsplashGallery from './UnsplashGallery';
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function Main() {
-  const [isDarkTheme, setIsDarkTheme] = useState(true)
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [searchValue, setSearchValue] = useState(''); 
 
   useEffect(() => {
-    document.body.classList.toggle('darkTheme', isDarkTheme)
-    document.body.classList.toggle('lightTheme', !isDarkTheme)
-  }, [isDarkTheme])
+    document.body.classList.toggle('darkTheme', isDarkTheme);
+    document.body.classList.toggle('lightTheme', !isDarkTheme);
+  }, [isDarkTheme]);
 
   const handleThemeChange = () => {
-    setIsDarkTheme(prev => !prev)
-  }
-  
+    setIsDarkTheme(prev => !prev);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value); 
+  };
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
       const uid = user.uid;
-      console.log("Usuário Logado " +uid)
-      // ...
+      console.log("Usuário Logado " + uid);
     } else {
-      // User is signed out
-      // ...
-      console.log("O usuário não está logado")
+      console.log("O usuário não está logado");
     }
   });
 
@@ -49,12 +49,16 @@ function Main() {
               <div className={`${styles.headerContent} d-flex align-items-center justify-content-end`}>
                 <form className="d-flex justify-content-end align-items-center">
                   <div className={styles.searchIcon}>
-                    <i className="fa fa-search" aria-hidden="true" aria-label="Buscar"></i>
+                    {searchValue === '' && (
+                      <i className="fa fa-search" aria-hidden="true" aria-label="Buscar"></i>
+                    )}
                     <input
                       className="form-control"
                       type="search"
                       placeholder="Buscar"
                       aria-label="Buscar"
+                      value={searchValue} 
+                      onChange={handleSearchChange} 
                     />
                   </div>
                   <label className={`${styles.switch} flex-shrink-0 mb-0`}>
@@ -86,7 +90,6 @@ function Main() {
         <div className="container-fluid">
           <div className={`${styles.contentInner} d-flex`}>
             <div className={styles.menuLinks}>
-              {/* Menu lateral */}
               <ul>
                 <li className={`${styles.navItem} ${styles.active}`}>
                   <a href="#" className="d-flex align-items-center nav-link">
@@ -138,17 +141,15 @@ function Main() {
                 </li>
               </ul>
             </div>
-
-            {/* Conteúdo principal */}
             <div className={styles.mainContent}>
-              {/* Aqui chamamos o componente que lida com a API e exibe as imagens */}
+              {/*API exibe as imagens */}
               <UnsplashGallery />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;

@@ -282,7 +282,7 @@ input:checked + .slider:before {
 
 .searchIcon i {
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: 20px;
   width: 20px;
   height: 20px;
