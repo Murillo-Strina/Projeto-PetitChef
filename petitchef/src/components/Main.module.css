@@ -160,12 +160,12 @@ h5 {
 }
 
 .switch::before {
-  content: '\f185'; /* Ícone do sol */
+  content: '\f185'; 
   font-size: 14px;
   line-height: 20px;
   position: absolute;
   top: 50%;
-  left: 8px; /* Ajuste fino */
+  left: 8px;
   color: #fff;
   transform: translateY(-50%);
   font-family: 'FontAwesome';
@@ -174,12 +174,12 @@ h5 {
 }
 
 .switch::after {
-  content: '\f186'; /* Ícone da lua */
+  content: '\f186'; 
   font-size: 14px;
   line-height: 20px;
   position: absolute;
   top: 50%;
-  right: 8px; /* Ajuste fino */
+  right: 8px; 
   color: #fff;
   transform: translateY(-50%);
   font-family: 'FontAwesome';
@@ -202,17 +202,17 @@ h5 {
 .slider:before {
   position: absolute;
   content: "";
-  height: 24px; /* Ajustado */
-  width: 24px; /* Ajustado */
-  left: 4px; /* Ajustado */
-  bottom: 3px; /* Ajustado */
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 3px;
   background-color: #fff;
   border-radius: 50%;
   transition: 0.4s;
 }
 
 input:checked + .slider:before {
-  transform: translateX(28px); /* Ajustado */
+  transform: translateX(28px);
 }
 
 input:checked + .slider {
