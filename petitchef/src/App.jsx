@@ -5,7 +5,7 @@ import Login from './components/login';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Projeto-PetitChef">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Main />} />
@@ -15,4 +15,3 @@ function App() {
 }
 
 export default App;
-
