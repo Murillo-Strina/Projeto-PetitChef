@@ -11,3 +11,5 @@ Desenvolvido com **React** e **Firebase**, o site combina tecnologia e praticida
 Ideal para iniciantes ou amantes da culinária, **PetitChef** é mais do que um site, é uma ferramenta para simplificar e transformar sua experiência na cozinha!  
 
 🍝 **PetitChef**: Cozinhe com o que você tem, aprenda e inspire-se! 💡
+
+Visite o site: [PetitChef no GitHub Pages](https://murillo-strina.github.io/Projeto-PetitChef/)
