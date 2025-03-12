@@ -5,11 +5,12 @@ export default defineConfig({
   plugins: [react()],
   css: {
     modules: {
-      scopeBehaviour: 'local', 
+      scopeBehaviour: 'local',
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-      localsConvention: 'camelCase', 
+      localsConvention: 'camelCase',
     },
   },
+  base: '/Projeto-PetitChef/', 
   build: {
     chunkSizeWarningLimit: 1000,
   },
