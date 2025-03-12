@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
+  base: command === 'build' ? './' : '/',
   css: {
     modules: {
-      scopeBehaviour: 'local', 
+      scopeBehaviour: 'local',
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-      localsConvention: 'camelCase', 
+      localsConvention: 'camelCase',
     },
   },
   build: {
-    chunkSizeWarningLimit: 1000, 
+    chunkSizeWarningLimit: 1000,
   },
-  base: '/',
-});
+}));
