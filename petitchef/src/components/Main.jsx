@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './Main.module.css';
 import logoImage from '/PetitChefLogo.png';
 import UnsplashGallery from './UnsplashGallery';
 import { auth } from "../../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
-  const [searchValue, setSearchValue] = useState(''); 
+  const [searchValue, setSearchValue] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList.toggle('darkTheme', isDarkTheme);
@@ -19,7 +23,29 @@ function Main() {
   };
 
   const handleSearchChange = (event) => {
-    setSearchValue(event.target.value); 
+    setSearchValue(event.target.value);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login'); // Redireciona para a página de login
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
   };
 
   onAuthStateChanged(auth, (user) => {
@@ -57,8 +83,8 @@ function Main() {
                       type="search"
                       placeholder="Buscar"
                       aria-label="Buscar"
-                      value={searchValue} 
-                      onChange={handleSearchChange} 
+                      value={searchValue}
+                      onChange={handleSearchChange}
                     />
                   </div>
                   <label className={`${styles.switch} flex-shrink-0 mb-0`}>
@@ -71,12 +97,19 @@ function Main() {
                     <span className={`${styles.slider} ${styles.round}`}></span>
                   </label>
                 </form>
-                <a href="#" className={styles.profile}>
+                <div className={styles.profile} ref={dropdownRef}>
                   <img
                     src="https://yudiz.com/codepen/nft-store/user-pic1.svg"
                     alt="user-image"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    style={{ cursor: 'pointer' }}
                   />
-                </a>
+                  <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.open : ''}`}>
+                    <a href="#">Perfil</a>
+                    <a href="#">Configurações</a>
+                    <a href="#" onClick={handleLogout}>Sair</a>
+                  </div>
+                </div>
                 <a href="#" className={styles.notification}>
                   <i className="fa fa-bell" aria-hidden="true" aria-label="Notificações"></i>
                 </a>
@@ -142,7 +175,6 @@ function Main() {
               </ul>
             </div>
             <div className={styles.mainContent}>
-              {/*API exibe as imagens */}
               <UnsplashGallery />
             </div>
           </div>
