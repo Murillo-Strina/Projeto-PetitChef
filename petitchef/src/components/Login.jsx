@@ -50,7 +50,7 @@ function Login() {
       }
       
       setTimeout(() => {
-        window.location.href = "http://localhost:5173";
+        window.location.href = "https://murillo-strina.github.io/Projeto-PetitChef/";
       }, 2500);
     } catch (error) {
       console.error("Erro ao cadastrar:", error.code, error.message);
@@ -63,7 +63,7 @@ function Login() {
       setIsSubmitted(true);
       console.log("Usuário Logado:", userCredential.user);
       setTimeout(() => {
-        window.location.href = "http://localhost:5173";
+        window.location.href = "https://murillo-strina.github.io/Projeto-PetitChef/";
       }, 2500);
     } catch (error) {
       console.error("Erro ao fazer login:", error.code, error.message);
