@@ -1,16 +1,22 @@
 # 🧑‍🍳 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef/)
 
 **PetitChef** é um projeto colaborativo criado para tornar o ato de cozinhar mais fácil, divertido e acessível. 🚀  
-
-Desenvolvido com **React** e **Firebase**, o site combina tecnologia e praticidade para ajudar você a:  
+Desenvolvido com **React** e **Firebase**, o site combina tecnologia e praticidade para ajudar você a:
 
 - 👨‍🍳 **Aprender receitas** de forma simples, com base nos ingredientes que você já possui.
-- 🍽️ **Descobrir receitas** adaptadas ao que você já tem em casa.  
-- 🔖 **Salvar suas receitas favoritas** para acessar sempre que precisar.  
+- 🍽️ **Descobrir receitas** adaptadas ao que você já tem em casa.
+- 🔖 **Salvar suas receitas favoritas** para acessar sempre que precisar.
 
 Ideal para iniciantes ou amantes da culinária, **PetitChef** é mais do que um site, é uma ferramenta para simplificar e transformar sua experiência na cozinha!  
 
 🍝 **PetitChef**: Cozinhe com o que você tem, aprenda e inspire-se! 💡
+
+---
+
+## 🌐 Acesse o Site
+
+Visite o site e comece a cozinhar hoje mesmo:  
+👉 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef/)
 
 ---
 
@@ -45,13 +51,6 @@ Ideal para iniciantes ou amantes da culinária, **PetitChef** é mais do que um 
 
 ---
 
-## 🌐 Acesse o Site
-
-Visite o site e comece a cozinhar hoje mesmo:  
-👉 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef/)
-
----
-
 ## 📄 Licença
 
 Este projeto está sob a licença **Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND)**.  
@@ -59,6 +58,8 @@ Para mais detalhes, veja o arquivo [LICENSE](LICENSE).
 
 ---
 
-Feito por [Murillo Strina](https://github.com/murillo-strina) e [Danilo Spinola](https://github.com/danilospinola).  
+## Feito Por
+
+[Murillo Strina](https://github.com/murillo-strina) e [Danilo Spinola](https://github.com/danilospinola).  
 
 🍳 **Bom apetite!**
