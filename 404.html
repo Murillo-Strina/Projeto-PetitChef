@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
   <script>
-    const path = window.location.pathname.split('/').slice(2).join('/'); 
-    window.location.href = `/Projeto-PetitChef/${path || ''}`;
+    const path = window.location.pathname.split('/').slice(2).join('/'); // Ignora as duas primeiras partes do caminho
+    if (path) {
+      window.location.href = `/Projeto-PetitChef/${path}`; // Redireciona para o caminho correto
+    } else {
+      window.location.href = '/Projeto-PetitChef/'; // Redireciona para a raiz se o caminho estiver vazio
+    }
   </script>
 </head>
 <body>
