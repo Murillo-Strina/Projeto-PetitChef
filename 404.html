@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
   <script>
-    const path = window.location.pathname.split('/').slice(2).join('/'); 
     if (!sessionStorage.getItem("redirected")) {
       sessionStorage.setItem("redirected", "true"); 
-      if (path) {
-        window.location.href = `/Projeto-PetitChef/${path}`;
-      } else {
-        window.location.href = '/Projeto-PetitChef/';
-      }
+
+      const path = window.location.pathname.split('/').slice(2).join('/');
+      const newUrl = path 
+        ? `${window.location.origin}/Projeto-PetitChef/${path}` 
+        : `${window.location.origin}/Projeto-PetitChef/`;
+
+      console.log("Redirecionando para:", newUrl); 
+      window.location.href = newUrl; 
     } else {
       sessionStorage.removeItem("redirected");
     }
