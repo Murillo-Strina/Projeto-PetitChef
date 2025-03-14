@@ -52,5 +52,12 @@ Visite o site e comece a cozinhar hoje mesmo:
 
 ---
 
-Feito com ❤️ por [Murillo Strina](https://github.com/murillo-strina) e [Danilo Spinola](https://github.com/danilospinola).  
+## 📄 Licença
+
+Este projeto está sob a licença **Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND)**.  
+Para mais detalhes, veja o arquivo [LICENSE](LICENSE).
+
+---
+
+Feito por [Murillo Strina](https://github.com/murillo-strina) e [Danilo Spinola](https://github.com/danilospinola).  
 🍳 **Bom apetite!**
