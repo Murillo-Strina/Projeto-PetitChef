@@ -6,7 +6,7 @@
   <title>Redirecting...</title>
   <script>
     const path = window.location.pathname.split('/').slice(2).join('/'); 
-    window.location.href = `/Projeto-PetitChef/${path}`;
+    window.location.href = `/Projeto-PetitChef/${path || ''}`;
   </script>
 </head>
 <body>
