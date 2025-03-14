@@ -60,4 +60,5 @@ Para mais detalhes, veja o arquivo [LICENSE](LICENSE).
 ---
 
 Feito por [Murillo Strina](https://github.com/murillo-strina) e [Danilo Spinola](https://github.com/danilospinola).  
+
 🍳 **Bom apetite!**
