@@ -6,7 +6,7 @@ function UnsplashGallery() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
-  const CACHE_DURATION = 60000;
+  const CACHE_DURATION =  30 * 60 * 1000;
 
   const fetchImages = async () => {
     const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID;

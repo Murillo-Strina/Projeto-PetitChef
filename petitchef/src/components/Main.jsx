@@ -10,6 +10,7 @@ function Main() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -17,6 +18,21 @@ function Main() {
     document.body.classList.toggle('darkTheme', isDarkTheme);
     document.body.classList.toggle('lightTheme', !isDarkTheme);
   }, [isDarkTheme]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log("Usuário Logado " + uid);
+      } else {
+        console.log("O usuário não está logado");
+        navigate('/login');
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleThemeChange = () => {
     setIsDarkTheme(prev => !prev);
@@ -42,20 +58,36 @@ function Main() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate('/login'); // Redireciona para a página de login
+      navigate('/login');
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
   };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      console.log("Usuário Logado " + uid);
-    } else {
-      console.log("O usuário não está logado");
-    }
-  });
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <div className={styles.spinner}>
+          <svg
+            width="65px"
+            height="65px"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              className={styles.path}
+              fill="none"
+              strokeWidth="6"
+              strokeLinecap="round"
+              cx="33"
+              cy="33"
+              r="30"
+            ></circle>
+          </svg>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
