@@ -1,5 +1,7 @@
 # 🧑‍🍳 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef/)
 
+![Work in Progress](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+
 **PetitChef** é um projeto colaborativo criado para tornar o ato de cozinhar mais fácil, divertido e acessível. 🚀  
 Desenvolvido com **React** e **Firebase**, o site combina tecnologia e praticidade para ajudar você a:
 
