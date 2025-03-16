@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecionando...</title>
+  </head>
+  <body>
+    <p>Redirecionando...</p>
+    <script>
+      // Obtém a rota que foi digitada
+      var path = window.location.pathname;
+      // Redireciona para index.html com a rota como hash
+      window.location.replace(window.location.origin + "/#" + path);
+    </script>
+  </body>
+</html>

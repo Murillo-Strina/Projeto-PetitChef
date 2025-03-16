@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './components/Main';
 import Login from './components/Login';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -9,7 +9,7 @@ import './components/Main.css';
 function App() {
   return (
     <ThemeProvider>
-      <Router basename="/Projeto-PetitChef">
+      <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
