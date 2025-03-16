@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import InputField from "./InputFieldLogin"; 
 import {
@@ -10,10 +11,17 @@ import { auth, db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [nome, setNome] = useState("");
+  const navigate = useNavigate();
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginSenha, setLoginSenha] = useState("");
+
+  const [signupNome, setSignupNome] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupSenha, setSignupSenha] = useState("");
+
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleKeyPress = (event, action) => {
     if (event.key === "Enter") action();
@@ -21,41 +29,37 @@ function Login() {
 
   const handleSignUp = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupSenha);
       setIsSubmitted(true);
       console.log("Usuário cadastrado:", userCredential.user);
       try {
-        await addDoc(collection(db, "Usuario"), { nome, email });
+        await addDoc(collection(db, "Usuario"), { nome: signupNome, email: signupEmail });
       } catch (error) {
         console.error("Erro ao salvar dados no Firestore:", error.code, error.message);
       }
-      setTimeout(() => {
-        window.location.href = "https://murillo-strina.github.io/Projeto-PetitChef/";
-      }, 2500);
+
+      setTimeout(() => navigate("/"), 2500);
     } catch (error) {
-      console.error("Erro ao cadastrar:", error.code, error.message);
+      setErrorMessage("Erro ao cadastrar. Verifique os dados e tente novamente.");
     }
   };
 
   const handleSignIn = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginSenha);
       setIsSubmitted(true);
       console.log("Usuário logado:", userCredential.user);
-      setTimeout(() => {
-        window.location.href = "https://murillo-strina.github.io/Projeto-PetitChef/";
-      }, 2500);
+      setTimeout(() => navigate("/"), 2500);
     } catch (error) {
-      console.error("Erro ao fazer login:", error.code, error.message);
+      setErrorMessage("E-mail ou senha incorretos. Tente novamente.");
     }
   };
 
   const handleResetPassword = async () => {
     try {
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, loginEmail);
       alert("E-mail de redefinição de senha enviado com sucesso!");
     } catch (error) {
-      console.error("Erro ao enviar e-mail de redefinição:", error.code, error.message);
       alert("Erro ao enviar e-mail de redefinição. Verifique o e-mail informado.");
     }
   };
@@ -63,11 +67,15 @@ function Login() {
   useEffect(() => {
     const button = document.querySelector(`.${styles.img__btn}`);
     const container = document.querySelector(`.${styles.cont}`);
-    if (button && container) {
-      const toggleSignup = () => container.classList.toggle(styles.sSignup);
-      button.addEventListener("click", toggleSignup);
-      return () => button.removeEventListener("click", toggleSignup);
-    }
+
+    if (!button || !container) return;
+
+    const toggleSignup = () => container.classList.toggle(styles.sSignup);
+    button.addEventListener("click", toggleSignup);
+
+    return () => {
+      button.removeEventListener("click", toggleSignup);
+    };
   }, []);
 
   return (
@@ -78,20 +86,23 @@ function Login() {
           <InputField
             label="Email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
             onKeyDown={(e) => handleKeyPress(e, handleSignIn)}
           />
           <InputField
             label="Senha"
             type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={loginSenha}
+            onChange={(e) => setLoginSenha(e.target.value)}
             onKeyDown={(e) => handleKeyPress(e, handleSignIn)}
           />
           <p className={`${styles.forgotPass} ${styles.textDarker}`} onClick={handleResetPassword}>
             Esqueceu a senha?
           </p>
+          
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
           {!isSubmitted ? (
             <button type="button" className={styles.submit} onClick={handleSignIn}>
               Entrar
@@ -103,49 +114,49 @@ function Login() {
             </svg>
           )}
         </div>
-
         <div className={styles.subCont}>
           <div className={styles.img}>
             <div className={`${styles.imgText} ${styles.mUp}`}>
               <h2 className={styles.textDarker}>Novo por aqui?</h2>
-              <p className={styles.textDarker}>
-                Cadastre-se e descubra um mundo de novas receitas!
-              </p>
+              <p className={styles.textDarker}>Cadastre-se e descubra um mundo de novas receitas!</p>
             </div>
             <div className={`${styles.imgText} ${styles.mIn}`}>
               <h2 className={styles.textDarker}>Já é um de nós?</h2>
-              <p className={styles.textDarker}>
-                Se você já tem uma conta, é só fazer login!
-              </p>
+              <p className={styles.textDarker}>Se você já tem uma conta, é só fazer login!</p>
             </div>
             <div className={styles.img__btn}>
               <span className={styles.mUp}>Cadastrar</span>
               <span className={styles.mIn}>Entrar</span>
             </div>
           </div>
+
+          {/* Formulário de Cadastro */}
           <div className={`${styles.form} ${styles.signUp}`}>
             <h2 className={styles.textDarker}>Prepare-se para saborear o melhor!</h2>
             <InputField
               label="Nome"
               type="text"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
+              value={signupNome}
+              onChange={(e) => setSignupNome(e.target.value)}
               onKeyDown={(e) => handleKeyPress(e, handleSignUp)}
             />
             <InputField
               label="Email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
               onKeyDown={(e) => handleKeyPress(e, handleSignUp)}
             />
             <InputField
               label="Senha"
               type="password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
+              value={signupSenha}
+              onChange={(e) => setSignupSenha(e.target.value)}
               onKeyDown={(e) => handleKeyPress(e, handleSignUp)}
             />
+            
+            {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
             {!isSubmitted ? (
               <button type="button" className={styles.submit} onClick={handleSignUp}>
                 Cadastrar
