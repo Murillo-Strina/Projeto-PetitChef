@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styles from './Main.module.css';
+import './Main.css';
 
 function UnsplashGallery() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
-  const CACHE_DURATION =  30 * 60 * 1000;
+  const CACHE_DURATION = 30 * 60 * 1000;
 
   const fetchImages = async () => {
     const clientId = import.meta.env.VITE_UNSPLASH_CLIENT_ID;
@@ -87,16 +87,16 @@ function UnsplashGallery() {
   }
 
   return (
-    <div className={styles.mainContent}>
-      <div className={`${styles.heroContainer} d-flex`}>
-        <div className={styles.heroLeft}>
+    <div className="mainContent">
+      <div className="heroContainer d-flex">
+        <div className="heroLeft">
           <img
             src={images[0].urls.regular}
             alt="Prato"
-            className={styles.heroImage}
+            className="heroImage"
             loading="lazy"
           />
-          <p className={styles.heroCredit}>
+          <p className="heroCredit">
             Foto por{' '}
             <a
               href={`${images[0].user.links.html}?utm_source=PetitChef&utm_medium=referral`}
@@ -115,25 +115,25 @@ function UnsplashGallery() {
             </a>
           </p>
         </div>
-        <div className={styles.heroRight}>
-          <h2 className={styles.heroTitle}>Venha conhecer nosso novo prato!</h2>
-          <p className={styles.heroSubtitle}>Experimente um sabor como nunca antes.</p>
+        <div className="heroRight">
+          <h2 className="heroTitle">Venha conhecer nosso novo prato!</h2>
+          <p className="heroSubtitle">Experimente um sabor como nunca antes.</p>
         </div>
       </div>
 
-      <div className={styles.dishesContainer}>
+      <div className="dishesContainer">
         {images.slice(1, 9).map((img, index) => (
-          <div key={img.id} className={`${styles.dishCard} ${styles.dishTheme}`}>
+          <div key={img.id} className="dishCard dishTheme">
             <img
               src={img.urls.small}
               alt="Prato"
-              className={styles.dishImage}
+              className="dishImage"
               loading="lazy"
             />
-            <h3 className={styles.dishTitle}>
+            <h3 className="dishTitle">
               {promotionalMessages[index % promotionalMessages.length]}
             </h3>
-            <p className={styles.dishCredit}>
+            <p className="dishCredit">
               Foto por{' '}
               <a
                 href={`${img.user.links.html}?utm_source=PetitChef&utm_medium=referral`}

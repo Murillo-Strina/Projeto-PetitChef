@@ -1,16 +1,21 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import Main from './components/Main';
-import Login from './components/Login'; 
+import Login from './components/Login';
+import { ThemeProvider } from './contexts/ThemeContext';
+import './App.css';
+import './components/Main.css';
 
 function App() {
   return (
-    <Router basename="/Projeto-PetitChef">
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Main />} />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router basename="/Projeto-PetitChef">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
