@@ -22,7 +22,7 @@ function Main() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        navigate('/login');
+        navigate('/#/login');
       }
       setLoading(false);
     });
