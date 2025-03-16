@@ -2,7 +2,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.1/css/font-awesome.min.css');
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');
 
-:global(.lightTheme) {
+.lightTheme {
   --color-background: #e5decf;
   --color-primary-text: #000000;
   --color-logo-text: #000000;
@@ -16,7 +16,7 @@
   --color-faded-white: #000000;
 }
 
-:global(.darkTheme) {
+.darkTheme {
   --color-background: #141217;
   --color-primary-text: #ffffff;
   --color-logo-text: #ffffff;
@@ -29,6 +29,7 @@
   --color-light-grey: #5A5E6880;
   --color-faded-white: #FFFFFF80;
 }
+
 
 body {
   background-color: var(--color-background);
@@ -724,7 +725,15 @@ input[type="search"]::placeholder {
   }
 }
 
-/* =========================== */
+.contentWrapper {
+  padding: 20px;
+}
+
+.contentInner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* 📱 MOBILE (até 480px) */
 /* =========================== */
 @media (max-width: 480px) {
@@ -752,7 +761,7 @@ input[type="search"]::placeholder {
   }
 
   .menuLinks {
-    display: none; /* Esconde o menu lateral no mobile */
+    display: none; 
   }
 
   .mainContent {
@@ -791,8 +800,6 @@ input[type="search"]::placeholder {
   .fireContent .fireTime {
     padding: 16px;
   }
-
-
 }
 
 /* =========================== */
@@ -909,3 +916,4 @@ input[type="search"]::placeholder {
     flex: 0 0 calc(33.333% - 1rem);
   }
 }
+

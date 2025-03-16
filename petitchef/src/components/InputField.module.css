@@ -1,0 +1,16 @@
+.inputField {
+    margin: 10px 0;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: white;
+}
+
+.input {
+    margin-top: 5px;
+    padding: 6px 8px;
+    color: white;
+}
