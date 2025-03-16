@@ -14,7 +14,7 @@ Ideal para iniciantes ou amantes da culinária, **PetitChef** é mais do que um 
 🍝 **PetitChef**: Cozinhe com o que você tem, aprenda e inspire-se! 💡
 
 Visite o site e comece a cozinhar hoje mesmo:  
-👉 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef/)
+👉 [PetitChef](https://murillo-strina.github.io/Projeto-PetitChef)
 
 ---
 
