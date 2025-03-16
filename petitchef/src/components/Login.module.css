@@ -390,3 +390,124 @@ input {
     box-shadow: inset 0px 0px 0px 30px #4caf50;
   }
 }
+
+
+
+/* Responsividade do celular*/
+
+/* Responsividade para celulares */
+@media (max-width: 768px) {
+  .loginBody {
+    padding: 20px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .cont {
+    width: 100%;
+    height: auto;
+    min-height: 90vh;
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .form {
+    width: 100%;
+    padding: 30px 15px 0;
+    margin-top: 0;
+  }
+
+  .sub-cont {
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding-left: 0;
+  }
+
+  .cont.s--signup .sub-cont {
+    transform: none;
+  }
+
+  .img {
+    display: none; /* Esconde a imagem lateral em mobile */
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  label {
+    width: 100%;
+    max-width: 260px;
+    margin: 15px auto 0;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  button, .submit {
+    width: 100%;
+    max-width: 260px;
+    font-size: 14px;
+  }
+
+  .tip {
+    font-size: 16px;
+    margin: 20px auto 30px;
+  }
+
+  .forgotPass {
+    font-size: 10px;
+  }
+
+  .img__text {
+    position: relative;
+    top: 0;
+    padding: 20px;
+  }
+
+  .img__text h2 {
+    font-size: 18px;
+  }
+
+  .img__text p {
+    font-size: 12px;
+  }
+
+  .sign-in {
+    left: 0;
+    top: 0;
+    position: relative;
+  }
+
+  .cont.s--signup .sign-in {
+    transform: none;
+  }
+
+  .sign-up {
+    transform: none;
+  }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+  .cont {
+    border-radius: 15px;
+    min-height: 95vh;
+  }
+
+  .form {
+    padding: 20px 10px 0;
+  }
+
+  .submit {
+    margin-top: 30px;
+  }
+
+  .tip {
+    font-size: 14px;
+    margin: 15px auto 20px;
+  }
+}
