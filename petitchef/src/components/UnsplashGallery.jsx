@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Main.css';
+import './Main.css';
 
 function UnsplashGallery() {
   const [images, setImages] = useState([]);
