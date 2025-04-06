@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
-import logoImage from '/PetitChefLogo.png';
+import React, { useState, useRef, useEffect } from "react";
+import logoImage from "/PetitChefLogo.png";
 
 function MainHeader({
   searchValue,
   onSearchChange,
   isDarkTheme,
   onToggleTheme,
-  onLogout
+  onLogout,
+  onProfileClick,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -17,8 +18,8 @@ function MainHeader({
         setIsDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -38,8 +39,12 @@ function MainHeader({
             <div className="headerContent d-flex align-items-center justify-content-end">
               <form className="d-flex justify-content-end align-items-center">
                 <div className="searchIcon">
-                  {searchValue === '' && (
-                    <i className="fa fa-search" aria-hidden="true" aria-label="Buscar"></i>
+                  {searchValue === "" && (
+                    <i
+                      className="fa fa-search"
+                      aria-hidden="true"
+                      aria-label="Buscar"
+                    ></i>
                   )}
                   <input
                     className="form-control"
@@ -64,16 +69,30 @@ function MainHeader({
                   src="https://yudiz.com/codepen/nft-store/user-pic1.svg"
                   alt="user-image"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 />
-                <div className={`dropdownMenu ${isDropdownOpen ? 'open' : ''}`}>
-                  <a href="#">Perfil</a>
+                <div className={`dropdownMenu ${isDropdownOpen ? "open" : ""}`}>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault(); // Impede o comportamento padrão do link
+                      onProfileClick();
+                    }}
+                  >
+                    Perfil
+                  </a>
                   <a href="#">Configurações</a>
-                  <a href="#" onClick={onLogout}>Sair</a>
+                  <a href="#" onClick={onLogout}>
+                    Sair
+                  </a>
                 </div>
               </div>
               <a href="#" className="notification">
-                <i className="fa fa-bell" aria-hidden="true" aria-label="Notificações"></i>
+                <i
+                  className="fa fa-bell"
+                  aria-hidden="true"
+                  aria-label="Notificações"
+                ></i>
               </a>
             </div>
           </div>

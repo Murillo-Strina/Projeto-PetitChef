@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 function Login() {
   const navigate = useNavigate();
@@ -31,13 +31,13 @@ function Login() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupSenha);
       setIsSubmitted(true);
-      console.log("Usuário cadastrado:", userCredential.user);
-      try {
-        await addDoc(collection(db, "Usuario"), { nome: signupNome, email: signupEmail });
-      } catch (error) {
-        console.error("Erro ao salvar dados no Firestore:", error.code, error.message);
-      }
-
+      
+      // Salvar dados no Firestore com UID como ID do documento
+      await setDoc(doc(db, "Usuarios", userCredential.user.uid), {
+        nome: signupNome,
+        email: signupEmail
+      });
+  
       setTimeout(() => navigate("/"), 2500);
     } catch (error) {
       setErrorMessage("Erro ao cadastrar. Verifique os dados e tente novamente.");

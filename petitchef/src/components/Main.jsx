@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import './Main.css';
@@ -21,10 +21,11 @@ function Main() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate('/#/login');
+      if (!user || user == null) {
+        navigate('/login');
       }
       setLoading(false);
+      console.log(user)
     });
     return () => unsubscribe();
   }, [navigate]);
@@ -44,6 +45,10 @@ function Main() {
     } catch (error) {
       console.error('Erro ao fazer logout:', error);
     }
+  };
+
+  const handleProfile = () => {
+    navigate('/profile'); // Deve ser exatamente igual à rota definida
   };
 
   if (loading) {
@@ -71,6 +76,8 @@ function Main() {
     );
   }
 
+
+
   return (
     <div>
       <MainHeader
@@ -79,8 +86,9 @@ function Main() {
         isDarkTheme={isDarkTheme}
         onToggleTheme={handleThemeChange}
         onLogout={handleLogout}
+        onProfileClick={handleProfile}
       />
-
+      
       <div className="contentWrapper">
         <div className="container-fluid">
           <div className="contentInner d-flex">
