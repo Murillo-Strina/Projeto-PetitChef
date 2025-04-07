@@ -1,16 +1,9 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .ProfileBody {
     font-family: "Open Sans", Arial, sans-serif;
     min-height: 100vh;
     background-color: #fafafa;
     color: #262626;
     padding-bottom: 3rem;
-    font-size: 10px;
 }
 
 .ProfileBody img {
