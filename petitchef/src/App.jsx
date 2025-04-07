@@ -1,11 +1,10 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './components/Main';
-import Login from './components/Login';
-import Profile from './components/Profile';
+import Main from './components/Main/Main.jsx';
+import Login from './components/Login/Login.jsx';
+import Profile from './components/Profile/Profile.jsx';
 import { ThemeProvider } from './contexts/ThemeContext';
-import './App.css';
-import './components/Main.css';
+import './components/Main/Main.jsx';
 
 function App() {
   return (
