@@ -8,7 +8,7 @@ function MainHeader({
   onToggleTheme,
   onLogout,
   onProfileClick,
-  profile
+  profile,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -73,7 +73,24 @@ function MainHeader({
                   style={{ cursor: "pointer" }}
                 />
                 <div className={`dropdownMenu ${isDropdownOpen ? "open" : ""}`}>
-                  <a ><p>{profile.nome}</p></a>
+                  <a
+                    href="#"
+                    style={{
+                      // Remove todos os estilos de hover
+                      backgroundColor: "transparent",
+                      color: "inherit",
+                      textDecoration: "none",
+                      cursor: "default", // Opcional: mantém o cursor padrão
+                      outline: "none",
+                      // Força os mesmos estilos para hover/foco/ativo
+                      ":hover": { backgroundColor: "transparent" },
+                      ":focus": { backgroundColor: "transparent" },
+                      ":active": { backgroundColor: "transparent" },
+                    }}
+                    onClick={(e) => e.preventDefault()} // Previne comportamento padrão do link
+                  >
+                    <p>{(profile?.nome || "Usuário")}</p>
+                  </a>
                   <a
                     href="#"
                     onClick={(e) => {

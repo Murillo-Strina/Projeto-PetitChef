@@ -60,6 +60,10 @@ h5 {
   color: inherit;
 }
 
+p{
+  margin: 0;
+}
+
 .themeBtn {
   background: var(--color-accent);
   text-decoration: none;
@@ -653,6 +657,7 @@ input[type="search"]::placeholder {
   box-shadow: 0 4px 8px #0000001A;
   z-index: 1000;
   min-width: 160px;
+  width: max-content;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
