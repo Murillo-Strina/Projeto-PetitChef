@@ -8,6 +8,7 @@ function MainHeader({
   onToggleTheme,
   onLogout,
   onProfileClick,
+  profile
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -72,6 +73,7 @@ function MainHeader({
                   style={{ cursor: "pointer" }}
                 />
                 <div className={`dropdownMenu ${isDropdownOpen ? "open" : ""}`}>
+                  <a ><p>{profile.nome}</p></a>
                   <a
                     href="#"
                     onClick={(e) => {
